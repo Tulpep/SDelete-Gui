@@ -27,7 +27,7 @@ namespace SDelete_Gui.ViewModel
 
         private void ExecuteInstall()
         {
-            AddContextMenuToFiles("prueba", "notepad.exe %1");
+            AddContextMenuToFiles("Borrado Seguro", "sdelete -p 10 -s -q \"%1\"");
         }
 
 
