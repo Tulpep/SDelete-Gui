@@ -2,8 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        Title="SDelete Gui" Height="350" Width="525">
+        Title="SDelete Gui" Height="350" Width="525"
+                      DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
-        
+        <TextBox Text="{Binding ErrorMessage}" HorizontalAlignment="Left" Margin="172,147,0,0" VerticalAlignment="Top" Height="32" Width="119"/>
     </Grid>
 </controls:MetroWindow>
