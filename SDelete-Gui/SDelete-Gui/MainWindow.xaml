@@ -5,7 +5,7 @@
                       Title="SDelete Gui" Height="350" Width="525"
                       DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
-        <TextBox Text="{Binding ErrorMessage}" HorizontalAlignment="Left" Margin="35,45,0,0" VerticalAlignment="Top" Height="32" Width="472"/>
+        <TextBlock Text="{Binding ErrorMessage}" HorizontalAlignment="Left" Margin="35,45,0,0" VerticalAlignment="Top" Height="32" Width="472"/>
         <Button Margin="35,113,345,125" Command="{Binding ConfigureCommand}" Content="Configure"/>
         <Button Margin="370,113,10,125" Command="{Binding UnConfigureCommand}" Content="UnConfigure"/>
     </Grid>
