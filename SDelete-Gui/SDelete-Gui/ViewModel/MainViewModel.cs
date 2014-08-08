@@ -22,14 +22,16 @@ namespace SDelete_Gui.ViewModel
 
         public MainViewModel()
         {
+            ErrorMessage = "Ready to start";
             ConfigureCommand = new RelayCommand(() => ExecuteConfigure());
             UnConfigureCommand = new RelayCommand(() => ExecuteUnConfigure());
         }
 
         private void ExecuteConfigure()
         {
-            const string sdeleteCommand = "sdelete -p 10 -s -q \"%1\"";
-            if (AddContextMenuToFiles(FolderOrFile.File, _menuEntryTitle, sdeleteCommand) && AddContextMenuToFiles(FolderOrFile.Folder, _menuEntryTitle, sdeleteCommand))
+            const string sDeleteCommand = "sdelete -p 10 -s -q \"%1\"";
+            if (AddContextMenuToFiles(FolderOrFile.File, _menuEntryTitle, sDeleteCommand)
+                && AddContextMenuToFiles(FolderOrFile.Folder, _menuEntryTitle, sDeleteCommand))
             {
                 ErrorMessage = "Configured";
             }
@@ -40,7 +42,8 @@ namespace SDelete_Gui.ViewModel
         }
         private void ExecuteUnConfigure()
         {
-            if (RemoveContextMenuOfFiles(FolderOrFile.File, _menuEntryTitle) && RemoveContextMenuOfFiles(FolderOrFile.Folder, _menuEntryTitle))
+            if (RemoveContextMenuOfFiles(FolderOrFile.File, _menuEntryTitle)
+                && RemoveContextMenuOfFiles(FolderOrFile.Folder, _menuEntryTitle))
             {
                 ErrorMessage = "Unconfigured";
             }

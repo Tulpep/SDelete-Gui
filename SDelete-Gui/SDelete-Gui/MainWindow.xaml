@@ -2,11 +2,18 @@
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-                      Title="SDelete Gui" Height="350" Width="525"
+                      Title="SDelete Gui" Height="130" Width="300"
+                      ResizeMode="NoResize"
+                      EnableDWMDropShadow="True"
+                      WindowTransitionsEnabled="True"
                       DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
-        <TextBlock Text="{Binding ErrorMessage}" HorizontalAlignment="Left" Margin="35,45,0,0" VerticalAlignment="Top" Height="32" Width="472"/>
-        <Button Margin="35,113,345,125" Command="{Binding ConfigureCommand}" Content="Configure"/>
-        <Button Margin="370,113,10,125" Command="{Binding UnConfigureCommand}" Content="UnConfigure"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="284"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="{Binding ErrorMessage}" Margin="10,10,12,0" VerticalAlignment="Top" Height="23" Grid.ColumnSpan="2"/>
+        <Button Command="{Binding ConfigureCommand}"  Content="Configure" Margin="10,33,139,15" />
+        <Button Command="{Binding UnConfigureCommand}" Content="UnConfigure" Margin="150,33,2,15"/>
     </Grid>
 </controls:MetroWindow>
