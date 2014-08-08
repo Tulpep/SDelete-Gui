@@ -28,7 +28,8 @@ namespace SDelete_Gui.ViewModel
 
         private void ExecuteConfigure()
         {
-            if (AddContextMenuToFiles(_menuEntryTitle, "sdelete -p 10 -s -q \"%1\""))
+            const string sdeleteCommand = "sdelete -p 10 -s -q \"%1\"";
+            if (AddContextMenuToFiles(FolderOrFile.File, _menuEntryTitle, sdeleteCommand) && AddContextMenuToFiles(FolderOrFile.Folder, _menuEntryTitle, sdeleteCommand))
             {
                 ErrorMessage = "Configured";
             }
@@ -39,7 +40,7 @@ namespace SDelete_Gui.ViewModel
         }
         private void ExecuteUnConfigure()
         {
-            if (RemoveContextMenuOfFiles(_menuEntryTitle))
+            if (RemoveContextMenuOfFiles(FolderOrFile.File, _menuEntryTitle) && RemoveContextMenuOfFiles(FolderOrFile.Folder, _menuEntryTitle))
             {
                 ErrorMessage = "Unconfigured";
             }
@@ -50,14 +51,26 @@ namespace SDelete_Gui.ViewModel
         }
 
 
-        private bool AddContextMenuToFiles(string name, string command)
+        private bool AddContextMenuToFiles(FolderOrFile folderOrFile, string name, string command)
         {
             RegistryKey regmenu = null;
             RegistryKey regcmd = null;
+            string keyName;
+            switch (folderOrFile)
+            {
+                case FolderOrFile.File:
+                    keyName = "*\\shell\\" + name;
+                    break;
+                case FolderOrFile.Folder:
+                    keyName = "Folder\\shell\\" + name;
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+
             bool result;
             try
             {
-                string keyName = "*\\shell\\" + name;
                 regmenu = Registry.ClassesRoot.CreateSubKey(keyName);
                 regcmd = Registry.ClassesRoot.CreateSubKey(keyName + "\\command");
                 regcmd.SetValue("", command);
@@ -76,13 +89,23 @@ namespace SDelete_Gui.ViewModel
             }
 
             return result;
-
         }
-        private bool RemoveContextMenuOfFiles(string name)
+        private bool RemoveContextMenuOfFiles(FolderOrFile folderOrFile, string name)
         {
             try
             {
-                string keyName = "*\\shell\\" + name;
+                string keyName;
+                switch (folderOrFile)
+                {
+                    case FolderOrFile.File:
+                        keyName = "*\\shell\\" + name;
+                        break;
+                    case FolderOrFile.Folder:
+                        keyName = "Folder\\shell\\" + name;
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
                 Registry.ClassesRoot.DeleteSubKeyTree(keyName);
                 return true;
             }
