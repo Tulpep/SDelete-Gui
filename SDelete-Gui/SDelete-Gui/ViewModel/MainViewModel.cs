@@ -18,21 +18,34 @@ namespace SDelete_Gui.ViewModel
         public ICommand ConfigureCommand { get; set; }
         public ICommand UnConfigureCommand { get; set; }
 
+        private const string _menuEntryTitle = "Secure Delete";
 
         public MainViewModel()
         {
             ConfigureCommand = new RelayCommand(() => ExecuteConfigure());
+            UnConfigureCommand = new RelayCommand(() => ExecuteUnConfigure());
         }
 
         private void ExecuteConfigure()
         {
-            if (AddContextMenuToFiles("Secure Delete", "sdelete -p 10 -s -q \"%1\""))
+            if (AddContextMenuToFiles(_menuEntryTitle, "sdelete -p 10 -s -q \"%1\""))
             {
                 ErrorMessage = "Configured";
             }
             else
             {
                 ErrorMessage = "Removed";
+            };
+        }
+        private void ExecuteUnConfigure()
+        {
+            if (RemoveContextMenuOfFiles(_menuEntryTitle))
+            {
+                ErrorMessage = "Unconfigured";
+            }
+            else
+            {
+                ErrorMessage = "Failed unconfiguring";
             };
         }
 
