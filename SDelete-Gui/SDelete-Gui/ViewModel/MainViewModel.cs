@@ -15,19 +15,25 @@ namespace SDelete_Gui.ViewModel
             set { _errorMessage = value; RaisePropertyChanged("ErrorMessage"); }
         }
 
-        public ICommand InstallCommand { get; set; }
+        public ICommand ConfigureCommand { get; set; }
+        public ICommand UnConfigureCommand { get; set; }
 
 
         public MainViewModel()
         {
-            InstallCommand = new RelayCommand(() => ExecuteInstall());
-
-            ErrorMessage = "Hello";
+            ConfigureCommand = new RelayCommand(() => ExecuteConfigure());
         }
 
-        private void ExecuteInstall()
+        private void ExecuteConfigure()
         {
-            AddContextMenuToFiles("Borrado Seguro", "sdelete -p 10 -s -q \"%1\"");
+            if (AddContextMenuToFiles("Secure Delete", "sdelete -p 10 -s -q \"%1\""))
+            {
+                ErrorMessage = "Configured";
+            }
+            else
+            {
+                ErrorMessage = "Removed";
+            };
         }
 
 
@@ -38,8 +44,7 @@ namespace SDelete_Gui.ViewModel
             bool result;
             try
             {
-                const string menuName = "*\\shell\\";
-                string keyName = menuName + name;
+                string keyName = "*\\shell\\" + name;
                 regmenu = Registry.ClassesRoot.CreateSubKey(keyName);
                 regcmd = Registry.ClassesRoot.CreateSubKey(keyName + "\\command");
                 regcmd.SetValue("", command);
@@ -59,6 +64,19 @@ namespace SDelete_Gui.ViewModel
 
             return result;
 
+        }
+        private bool RemoveContextMenuOfFiles(string name)
+        {
+            try
+            {
+                string keyName = "*\\shell\\" + name;
+                Registry.ClassesRoot.DeleteSubKeyTree(keyName);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

@@ -6,6 +6,6 @@
                       DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
         <TextBox Text="{Binding ErrorMessage}" HorizontalAlignment="Left" Margin="172,147,0,0" VerticalAlignment="Top" Height="32" Width="119"/>
-        <Button Margin="330,180,50,58" Command="{Binding InstallCommand}">Install</Button>
+        <Button Margin="330,180,50,58" Command="{Binding ConfigureCommand}">Install</Button>
     </Grid>
 </controls:MetroWindow>
