@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("SDelete-Gui")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Tulpep")]
 [assembly: AssemblyProduct("SDelete-Gui")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
