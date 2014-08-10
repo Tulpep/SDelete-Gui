@@ -3,6 +3,9 @@ using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
 using System;
 using Microsoft.Win32;
+using System.Net;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace SDelete_Gui.ViewModel
 {
@@ -29,7 +32,14 @@ namespace SDelete_Gui.ViewModel
 
         private void ExecuteConfigure()
         {
-            const string sDeleteCommand = "sdelete -p 10 -s -q \"%1\"";
+            string sdeletePath = DownloadSdelete();
+            if (sdeletePath == null)
+            {
+                ErrorMessage = "Cannot download SDelete right now";
+                return;
+            }
+
+            string sDeleteCommand = String.Format("{0} -p 10 -s -q \"%1\"", sdeletePath);
             if (AddContextMenuToFiles(FolderOrFile.File, _menuEntryTitle, sDeleteCommand)
                 && AddContextMenuToFiles(FolderOrFile.Folder, _menuEntryTitle, sDeleteCommand))
             {
@@ -37,8 +47,26 @@ namespace SDelete_Gui.ViewModel
             }
             else
             {
-                ErrorMessage = "Removed";
+                ErrorMessage = "Cannot configure. Check your permissions";
             };
+        }
+        private string DownloadSdelete()
+        {
+            string result;
+            using (WebClient client = new WebClient())
+            {
+                try
+                {
+                    string downloadPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "sdelete.exe");
+                    client.DownloadFile("http://live.sysinternals.com/sdelete.exe", downloadPath);
+                    result = downloadPath;
+                }
+                catch
+                {
+                    result = null;
+                }
+            }
+            return result;
         }
         private void ExecuteUnConfigure()
         {
