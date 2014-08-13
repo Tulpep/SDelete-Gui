@@ -20,6 +20,7 @@ namespace SDelete_Gui.ViewModel
 
         public ICommand ConfigureCommand { get; set; }
         public ICommand UnConfigureCommand { get; set; }
+        public ICommand InfoCommand { get; set; }
 
         private const string _menuEntryTitle = "Secure Delete";
 
@@ -28,6 +29,10 @@ namespace SDelete_Gui.ViewModel
             ErrorMessage = "Ready to start";
             ConfigureCommand = new RelayCommand(() => ExecuteConfigure());
             UnConfigureCommand = new RelayCommand(() => ExecuteUnConfigure());
+            InfoCommand = new RelayCommand(() =>
+            {
+                System.Diagnostics.Process.Start("https://github.com/Tulpep/SDelete-Gui");
+            });
         }
 
         private void ExecuteConfigure()
