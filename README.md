@@ -1,7 +1,7 @@
 SDelete Gui
 ===========
 
-###Secure delete files with right click
+###Securely delete files with right click
 ![Gui](Screenshots/RightClick.png) 
 
 ##[Download now](https://www.tulpep.com)

@@ -8,7 +8,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SDelete-Gui")]
-[assembly: AssemblyDescription("Secure delete files with right click")]
+[assembly: AssemblyDescription("Securely delete files with right click")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Tulpep")]
 [assembly: AssemblyProduct("SDelete-Gui")]
