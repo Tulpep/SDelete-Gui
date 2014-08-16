@@ -8,11 +8,11 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SDelete-Gui")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Secure delete files with right click")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Tulpep")]
 [assembly: AssemblyProduct("SDelete-Gui")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Tulpep")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -53,3 +53,4 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: GuidAttribute("415ee1f1-3577-46db-ad59-bed724027f43")]
