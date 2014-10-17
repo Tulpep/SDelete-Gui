@@ -1,8 +1,10 @@
 SDelete Gui
 ===========
 
+![Build Status](https://ci.appveyor.com/api/projects/status/github/Tulpep/SDelete-Gui)
+
 ###Securely delete files with right click
-![Gui](Screenshots/RightClick.png) 
+![Gui](Screenshots/RightClick.png)
 
 ##[Download now](https://github.com/Tulpep/SDelete-Gui/releases/download/V1.0/SDelete-Gui.exe)
 
