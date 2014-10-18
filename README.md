@@ -1,7 +1,5 @@
-SDelete Gui
+SDelete Gui [![Build Status](https://ci.appveyor.com/api/projects/status/github/Tulpep/SDelete-Gui)](https://ci.appveyor.com/project/tulpep/SDelete-Gui)
 ===========
-
-![Build Status](https://ci.appveyor.com/api/projects/status/github/Tulpep/SDelete-Gui)
 
 ###Securely delete files with right click
 ![Gui](Screenshots/RightClick.png)
