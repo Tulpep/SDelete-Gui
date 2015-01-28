@@ -26,4 +26,4 @@ environment:
     secure: yfky3xGsKE0Kwe2xOHB2sQ==
 
 artifacts:
-  - path: '**\SDelete-Gui.exe
+  - path: '**\SDelete-Gui.exe'
