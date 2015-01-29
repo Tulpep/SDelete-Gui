@@ -27,7 +27,7 @@ environment:
 
 
 after_build:
-  - signtool sign /t http://timestamp.verisign.com/scripts/timstamp.dll /sha1 b6c83dfa006475aec9e458a48696c1c42ff1b5c4 "C:\projects\sdelete-gui\SDelete-Gui\bin\Release\SDelete-Gui.exe"
+  - "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Bin\signtool.exe" sign /t http://timestamp.verisign.com/scripts/timstamp.dll /sha1 b6c83dfa006475aec9e458a48696c1c42ff1b5c4 "C:\projects\sdelete-gui\SDelete-Gui\bin\Release\SDelete-Gui.exe"
 
 artifacts:
   - path: '**\bin\Release\SDelete-Gui.exe'
