@@ -22,12 +22,16 @@ assembly_info:
 
 
 environment:
+  sign_tool: "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Bin\signtool.exe"
+  artifact_path: "C:\projects\sdelete-gui\SDelete-Gui\bin\Release\SDelete-Gui.exe"
+  timestamp_url: http://timestamp.verisign.com/scripts/timstamp.dll
+  pfx_file: "C:\projects\sdelete-gui\tulpep.pfx"
   pfx_password:
     secure: yfky3xGsKE0Kwe2xOHB2sQ==
 
 
 after_build:
-  - cmd: "%SignTool% sign /t %TimeStampServer% /sha1 b6c83dfa006475aec9e458a48696c1c42ff1b5c4 %ArtifactPath%"
+  - cmd: "%sign_tool% sign /f %pfx_file% /p %pfx_passfword% /t %timestamp_url% %artifact_path%
 
 artifacts:
   - path: '**\bin\Release\SDelete-Gui.exe'
