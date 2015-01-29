@@ -31,7 +31,7 @@ environment:
 
 
 after_build:
-  - cmd: '%sign_tool% sign /f %pfx_file% /p %pfx_passfword% /t %timestamp_url% %artifact_path%'
+  - cmd: '"%sign_tool%" sign /f "%pfx_file%" /p %pfx_passfword% /t %timestamp_url% "%artifact_path%"'
 
 artifacts:
   - path: '**\bin\Release\SDelete-Gui.exe'
