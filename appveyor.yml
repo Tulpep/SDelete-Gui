@@ -41,7 +41,7 @@ deploy:
   release: SDelete-Gui-v$(appveyor_build_version)
   provider: GitHub
   auth_token:
-    secure: d952d10567350a665bc6e8b7f3013f3eefc6b7df
+    secure: ssdN9jwfliKlofAxdzvwHAd7QHhsiBG14a5IUwmd28I9f3aolEYj4sGCXceoggw1
   artifact: SDelete-Gui.exe
   draft: false
   prerelease: false
