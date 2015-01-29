@@ -34,5 +34,16 @@ after_build:
   - cmd: '"%sign_tool%" sign /f "%pfx_file%" /p %pfx_password% /t %timestamp_url% "%artifact_path%"'
 
 artifacts:
-  - path: '$(artifact_path)'
+  - path: '**\bin\Release\SDelete-Gui.exe'
     name: SDelete-Gui.exe
+
+deploy:
+  release: SDelete-Gui-v$(appveyor_build_version)
+  provider: GitHub
+  auth_token:
+    secure: d952d10567350a665bc6e8b7f3013f3eefc6b7df
+  artifact: SDelete-Gui.exe
+  draft: false
+  prerelease: false
+  on:
+    branch: master
