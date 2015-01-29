@@ -25,6 +25,10 @@ environment:
   pfx_password:
     secure: yfky3xGsKE0Kwe2xOHB2sQ==
 
+
+after_build:
+  - signtool sign /t http://timestamp.verisign.com/scripts/timstamp.dll /sha1 b6c83dfa006475aec9e458a48696c1c42ff1b5c4 "C:\projects\sdelete-gui\SDelete-Gui\bin\Release\SDelete-Gui.exe"
+
 artifacts:
   - path: '**\bin\Release\SDelete-Gui.exe'
     name: SDelete-Gui.exe
