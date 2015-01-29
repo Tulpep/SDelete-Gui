@@ -22,7 +22,7 @@ assembly_info:
 
 
 environment:
-  SignTool: C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Bin\signtool.exe
+  SignTool: "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Bin\signtool.exe"
   KeyFile: a.pfx
   ArtifactPath: "C:\projects\sdelete-gui\SDelete-Gui\bin\Release\SDelete-Gui.exe"
   TimeStampServer: http://timestamp.verisign.com/scripts/timstamp.dll
