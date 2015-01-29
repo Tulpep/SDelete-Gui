@@ -34,6 +34,5 @@ after_build:
   - cmd: '"%sign_tool%" sign /f "%pfx_file%" /p %pfx_password% /t %timestamp_url% "%artifact_path%"'
 
 artifacts:
-  - path: $(artifact_path)
+  - path: '$(artifact_path)'
     name: SDelete-Gui.exe
-        
