@@ -4,7 +4,7 @@ SDelete Gui [![Build Status](https://ci.appveyor.com/api/projects/status/github/
 ###Securely delete files with an easy to use right click option
 ![Gui](Screenshots/RightClick.png)
 
-##[Download now](https://github.com/Tulpep/SDelete-Gui/releases/download/V1.0/SDelete-Gui.exe)
+##[Download now](https://github.com/Tulpep/SDelete-Gui/releases/latest)
 
 
 A very simple utility that adds a new option to the Windows context menu (right click menu) to securely delete files and folders, using a United States Department of Defense compliant algorithm. This process will completely delete the item and it can never be recovered again.
