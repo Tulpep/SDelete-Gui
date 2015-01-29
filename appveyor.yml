@@ -10,6 +10,9 @@ init:
 cache:
   - SDelete-Gui\packages
 
+# Do not build on tags (GitHub only)
+skip_tags: true
+
 configuration: Release
 
 # Assembly Info
@@ -47,4 +50,3 @@ deploy:
   prerelease: false
   on:
     branch: master
-    appveyor_repo_tag: true        # deploy on tag push only
