@@ -98,7 +98,7 @@ namespace SDelete_Gui.ViewModel
                     keyName = "*\\shell\\" + name;
                     break;
                 case FolderOrFile.Folder:
-                    keyName = "Folder\\shell\\" + name;
+                    keyName = "Directory\\shell\\" + name;
                     break;
                 default:
                     throw new NotImplementedException();
@@ -137,7 +137,7 @@ namespace SDelete_Gui.ViewModel
                         keyName = "*\\shell\\" + name;
                         break;
                     case FolderOrFile.Folder:
-                        keyName = "Folder\\shell\\" + name;
+                        keyName = "Directory\\shell\\" + name;
                         break;
                     default:
                         throw new NotImplementedException();
