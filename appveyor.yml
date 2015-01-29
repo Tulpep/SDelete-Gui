@@ -27,7 +27,7 @@ environment:
 
 
 after_build:
-  - %SignTool% sign /t %TimeStampServer% /sha1 b6c83dfa006475aec9e458a48696c1c42ff1b5c4 %ArtifactPath%
+  - cmd: "%SignTool% sign /t %TimeStampServer% /sha1 b6c83dfa006475aec9e458a48696c1c42ff1b5c4 %ArtifactPath%"
 
 artifacts:
   - path: '**\bin\Release\SDelete-Gui.exe'
