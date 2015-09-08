@@ -28,9 +28,9 @@ environment:
   sign_tool: 'C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Bin\signtool.exe'
   artifact_path: 'C:\projects\sdelete-gui\SDelete-Gui\SDelete-Gui\bin\Release\SDelete-Gui.exe'
   timestamp_url: http://timestamp.verisign.com/scripts/timstamp.dll
-  pfx_file: 'C:\projects\sdelete-gui\tulpep.pfx'
+  pfx_file: 'C:\projects\sdelete-gui\Tulpep.pfx'
   pfx_password:
-    secure: yfky3xGsKE0Kwe2xOHB2sQ==
+    secure: UXs5vR5rWdPnFwFYootg6A==
 
 
 after_build:
