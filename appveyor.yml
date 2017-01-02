@@ -30,7 +30,7 @@ environment:
   timestamp_url: http://timestamp.verisign.com/scripts/timstamp.dll
   pfx_file: 'C:\projects\sdelete-gui\Tulpep.pfx'
   pfx_password:
-    secure: UXs5vR5rWdPnFwFYootg6A==
+    secure: UQSh4nfF0+NlaV7tLriphA==
 
 
 after_build:
