@@ -45,7 +45,7 @@ deploy:
   provider: GitHub
   description: ''
   auth_token:
-    secure: ssdN9jwfliKlofAxdzvwHAd7QHhsiBG14a5IUwmd28I9f3aolEYj4sGCXceoggw1
+    secure: Q+20Xaui8ng5gVvoMIkb0g4F0oqMZFVOJo4SNRc+KVN91WkjLe5gTMkifCyDZTlE
   artifact: SDelete-Gui.exe
   draft: false
   prerelease: false
