@@ -1,7 +1,7 @@
 shallow_clone: true
 
 # version format
-version: 1.0.{build}
+version: 1.1.{build}
 
 # Fix line endings in Windows. (runs before repo cloning)
 init:
