@@ -1,11 +1,10 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System.Windows.Input;
-using System;
 using Microsoft.Win32;
-using System.Net;
+using System;
 using System.IO;
-using System.Threading.Tasks;
+using System.Net;
+using System.Windows.Input;
 
 namespace SDelete_Gui.ViewModel
 {
@@ -24,6 +23,7 @@ namespace SDelete_Gui.ViewModel
 
         private const string _menuEntryTitle = "Secure Delete";
 
+
         public MainViewModel()
         {
             ErrorMessage = "Ready to start";
@@ -37,10 +37,11 @@ namespace SDelete_Gui.ViewModel
 
         private void ExecuteConfigure()
         {
-            string sdeletePath = DownloadSdelete();
-            if (sdeletePath == null)
+            string systemFolder = Environment.GetFolderPath(Environment.SpecialFolder.System);
+            string sdeletePath = Path.Combine(systemFolder, "sdelete.exe");
+            if (DownloadSdelete(sdeletePath))
             {
-                ErrorMessage = "Cannot download SDelete right now";
+                ErrorMessage = "Cannot download SDelete right now or it does not exists in " + systemFolder;
                 return;
             }
 
@@ -55,23 +56,20 @@ namespace SDelete_Gui.ViewModel
                 ErrorMessage = "Cannot configure. Check your permissions";
             };
         }
-        private string DownloadSdelete()
+        private bool DownloadSdelete(string downloadPath)
         {
-            string result;
             using (WebClient client = new WebClient())
             {
                 try
                 {
-                    string downloadPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "sdelete.exe");
                     client.DownloadFile("http://live.sysinternals.com/sdelete.exe", downloadPath);
-                    result = downloadPath;
+                    return true;
                 }
                 catch
                 {
-                    result = null;
+                    return File.Exists(downloadPath);
                 }
             }
-            return result;
         }
         private void ExecuteUnConfigure()
         {
