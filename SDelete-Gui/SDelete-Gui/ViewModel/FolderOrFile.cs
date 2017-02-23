@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SDelete_Gui.ViewModel
+﻿namespace SDelete_Gui.ViewModel
 {
-    enum FolderOrFile
+    enum KeyLocation
     {
-        File = 0,
-        Folder =1
+        File,
+        Folder,
+        Drive
     }
 }

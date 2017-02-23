@@ -21,7 +21,7 @@ namespace SDelete_Gui.ViewModel
         public ICommand UnConfigureCommand { get; set; }
         public ICommand InfoCommand { get; set; }
 
-        private const string _menuEntryTitle = "Secure Delete";
+        private const string MENU_ENTRY_TITLE = "Secure Delete";
 
 
         public MainViewModel()
@@ -46,8 +46,9 @@ namespace SDelete_Gui.ViewModel
             }
 
             string sDeleteCommand = String.Format("{0} -p 10 -s -q \"%1\"", sdeletePath);
-            if (AddContextMenuToFiles(FolderOrFile.File, _menuEntryTitle, sDeleteCommand)
-                && AddContextMenuToFiles(FolderOrFile.Folder, _menuEntryTitle, sDeleteCommand))
+            if (AddContextMenuToFiles(KeyLocation.File, MENU_ENTRY_TITLE, sDeleteCommand)
+                && AddContextMenuToFiles(KeyLocation.Folder, MENU_ENTRY_TITLE, sDeleteCommand)
+                && AddContextMenuToFiles(KeyLocation.Drive, MENU_ENTRY_TITLE, sDeleteCommand))
             {
                 ErrorMessage = "Configured";
             }
@@ -73,8 +74,8 @@ namespace SDelete_Gui.ViewModel
         }
         private void ExecuteUnConfigure()
         {
-            if (RemoveContextMenuOfFiles(FolderOrFile.File, _menuEntryTitle)
-                && RemoveContextMenuOfFiles(FolderOrFile.Folder, _menuEntryTitle))
+            if (RemoveContextMenuOfFiles(KeyLocation.File, MENU_ENTRY_TITLE)
+                && RemoveContextMenuOfFiles(KeyLocation.Folder, MENU_ENTRY_TITLE))
             {
                 ErrorMessage = "Unconfigured";
             }
@@ -85,18 +86,21 @@ namespace SDelete_Gui.ViewModel
         }
 
 
-        private bool AddContextMenuToFiles(FolderOrFile folderOrFile, string name, string command)
+        private bool AddContextMenuToFiles(KeyLocation folderOrFile, string name, string command)
         {
             RegistryKey regmenu = null;
             RegistryKey regcmd = null;
             string keyName;
             switch (folderOrFile)
             {
-                case FolderOrFile.File:
+                case KeyLocation.File:
                     keyName = "*\\shell\\" + name;
                     break;
-                case FolderOrFile.Folder:
+                case KeyLocation.Folder:
                     keyName = "Directory\\shell\\" + name;
+                    break;
+                case KeyLocation.Drive:
+                    keyName = "Drive\\shell\\" + name;
                     break;
                 default:
                     throw new NotImplementedException();
@@ -124,17 +128,17 @@ namespace SDelete_Gui.ViewModel
 
             return result;
         }
-        private bool RemoveContextMenuOfFiles(FolderOrFile folderOrFile, string name)
+        private bool RemoveContextMenuOfFiles(KeyLocation folderOrFile, string name)
         {
             try
             {
                 string keyName;
                 switch (folderOrFile)
                 {
-                    case FolderOrFile.File:
+                    case KeyLocation.File:
                         keyName = "*\\shell\\" + name;
                         break;
-                    case FolderOrFile.Folder:
+                    case KeyLocation.Folder:
                         keyName = "Directory\\shell\\" + name;
                         break;
                     default:
