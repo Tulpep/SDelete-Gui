@@ -17,6 +17,13 @@ namespace SDelete_Gui.ViewModel
             set { _errorMessage = value; RaisePropertyChanged("ErrorMessage"); }
         }
 
+        private int _numberOfPasses;
+        public int NumberOfPasses
+        {
+            get { return _numberOfPasses; }
+            set { _numberOfPasses = value; RaisePropertyChanged("NumberOfPasses"); }
+        }
+
         public ICommand ConfigureCommand { get; set; }
         public ICommand UnConfigureCommand { get; set; }
         public ICommand InfoCommand { get; set; }
@@ -26,6 +33,7 @@ namespace SDelete_Gui.ViewModel
 
         public MainViewModel()
         {
+            NumberOfPasses = 10;
             ErrorMessage = "Ready to start";
             ConfigureCommand = new RelayCommand(() => ExecuteConfigure());
             UnConfigureCommand = new RelayCommand(() => ExecuteUnConfigure());
@@ -45,12 +53,12 @@ namespace SDelete_Gui.ViewModel
                 return;
             }
 
-            string sDeleteCommand = String.Format("{0} -p 10 -s -q \"%1\"", sdeletePath);
+            string sDeleteCommand = String.Format("{0} -p {1} -s -q \"%1\"", sdeletePath, NumberOfPasses);
             if (AddContextMenuToFiles(KeyLocation.File, MENU_ENTRY_TITLE, sDeleteCommand)
                 && AddContextMenuToFiles(KeyLocation.Folder, MENU_ENTRY_TITLE, sDeleteCommand)
                 && AddContextMenuToFiles(KeyLocation.Drive, MENU_ENTRY_TITLE, sDeleteCommand))
             {
-                ErrorMessage = "Configured";
+                ErrorMessage = string.Format("Configured. SDelete will use {0} passes", NumberOfPasses);
             }
             else
             {
