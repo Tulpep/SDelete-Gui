@@ -39,7 +39,7 @@ namespace SDelete_Gui.ViewModel
         {
             string systemFolder = Environment.GetFolderPath(Environment.SpecialFolder.System);
             string sdeletePath = Path.Combine(systemFolder, "sdelete.exe");
-            if (!DownloadSdelete(sdeletePath))
+            if (!DownloadSdelete(sdeletePath) && !File.Exists(sdeletePath))
             {
                 ErrorMessage = "Cannot download SDelete right now or it does not exists in " + systemFolder;
                 return;
@@ -68,7 +68,7 @@ namespace SDelete_Gui.ViewModel
                 }
                 catch
                 {
-                    return File.Exists(downloadPath);
+                    return false;
                 }
             }
         }
