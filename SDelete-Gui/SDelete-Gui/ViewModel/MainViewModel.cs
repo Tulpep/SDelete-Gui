@@ -45,11 +45,11 @@ namespace SDelete_Gui.ViewModel
 
         private void ExecuteConfigure()
         {
-            string systemFolder = Environment.GetFolderPath(Environment.SpecialFolder.System);
-            string sdeletePath = Path.Combine(systemFolder, "sdelete.exe");
-            if (!DownloadSdelete(sdeletePath) && !File.Exists(sdeletePath))
+            string systempath = Environment.GetFolderPath(Environment.SpecialFolder.SystemX86);
+            string sdeletePath = Path.Combine(systempath, "sdelete.exe");
+            if (!File.Exists(sdeletePath) && !DownloadSdelete(sdeletePath))
             {
-                ErrorMessage = "Cannot download SDelete right now or it does not exists in " + systemFolder;
+                ErrorMessage = string.Format("SDelete.exe not found in {0} and cannot be downloaded from the Internet", systempath);
                 return;
             }
 
@@ -160,5 +160,7 @@ namespace SDelete_Gui.ViewModel
                 return false;
             }
         }
+
+
     }
 }
