@@ -175,7 +175,7 @@ namespace SDelete_Gui.ViewModel
                                   Command = String.Format("{0} -p {1} -s -q \"%1\"", sdeletePath, numberOfPassess) },
                  new RegistryKey { RegistryPath = "Drive\\shell\\",
                                   ShellName = "Secure Delete",
-                                  Command = String.Format("{0} -p {1} -c -z %1", sdeletePath, numberOfPassess) }
+                                  Command = String.Format(@"{0} -p {1} -q -z -c %1", sdeletePath, numberOfPassess) }
             };
         }
 
