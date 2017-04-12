@@ -41,7 +41,7 @@ artifacts:
     name: SDelete-Gui.exe
 
 deploy:
-  release: SDelete-Gui-v$(appveyor_build_version)
+  release: SDelete-Gui $(appveyor_build_version)
   provider: GitHub
   description: ''
   auth_token:
