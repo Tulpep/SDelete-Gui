@@ -30,7 +30,7 @@ environment:
   timestamp_url: http://timestamp.verisign.com/scripts/timstamp.dll
   pfx_file: 'C:\projects\sdelete-gui\Tulpep.pfx'
   pfx_password:
-    secure: UQSh4nfF0+NlaV7tLriphA==
+    secure: LdcyoQhXm2P2QuFz/ogRYpACnJeZDyka/QBzMKJkKKE=
 
 
 after_build:
@@ -45,7 +45,7 @@ deploy:
   provider: GitHub
   description: ''
   auth_token:
-    secure: Q+20Xaui8ng5gVvoMIkb0g4F0oqMZFVOJo4SNRc+KVN91WkjLe5gTMkifCyDZTlE
+    secure: nGvHoLNrH4j9xxQF0wMmlLRlVkflplJhlPqn9VMcv1llIQi+PQYVKhpuOcMJqHnh
   artifact: SDelete-Gui.exe
   draft: false
   prerelease: false
