@@ -73,7 +73,7 @@ namespace SDelete_Gui.ViewModel
                     client.DownloadFile("https://live.sysinternals.com/sdelete.exe", downloadPath);
                     return true;
                 }
-                catch(Exception ex)
+                catch
                 {
                     return false;
                 }
