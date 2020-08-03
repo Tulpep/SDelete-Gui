@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
+using SDelete_Gui.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,19 +30,18 @@ namespace SDelete_Gui.ViewModel
         public ICommand UnConfigureCommand { get; set; }
         public ICommand InfoCommand { get; set; }
 
-        private string _systempath = Environment.GetFolderPath(Environment.SpecialFolder.SystemX86);
-        private string _sdeletePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.SystemX86), "sdelete.exe");
-
+        private readonly string _systempath = Environment.GetFolderPath(Environment.SpecialFolder.SystemX86);
+        private readonly string _sdeletePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.SystemX86), "sdelete.exe");
 
         public MainViewModel()
         {
             NumberOfPasses = 10;
-            ErrorMessage = "Ready to start";
+            ErrorMessage = Messages.ReadyToStart;
             ConfigureCommand = new RelayCommand(() => ExecuteConfigure());
             UnConfigureCommand = new RelayCommand(() => ExecuteUnConfigure());
             InfoCommand = new RelayCommand(() =>
             {
-                System.Diagnostics.Process.Start("https://github.com/Tulpep/SDelete-Gui");
+                _ = System.Diagnostics.Process.Start("https://github.com/Tulpep/SDelete-Gui#sdelete-gui-");
             });
         }
 
@@ -49,21 +49,20 @@ namespace SDelete_Gui.ViewModel
         {
             if (!File.Exists(_sdeletePath) && !DownloadSdelete(_sdeletePath))
             {
-                ErrorMessage = string.Format("SDelete.exe not found in {0} and cannot be downloaded from the Internet", _systempath);
+                ErrorMessage = string.Format(Messages.SDeleteNotFoundAndNotDownloadable, _systempath);
                 return;
             }
 
-
-
             if (AddToAllContextMenus(_sdeletePath, NumberOfPasses))
             {
-                ErrorMessage = string.Format("Configured. SDelete will use {0} passes", NumberOfPasses);
+                ErrorMessage = string.Format(Messages.ConfiguredXPasses, NumberOfPasses);
             }
             else
             {
-                ErrorMessage = "Cannot configure. Check your permissions";
+                ErrorMessage = Messages.CheckPermissions;
             };
         }
+
         private bool DownloadSdelete(string downloadPath)
         {
             using (WebClient client = new WebClient())
@@ -83,12 +82,12 @@ namespace SDelete_Gui.ViewModel
         {
             if (RemoveFromAllContextMenu() && RemoveSdeleteFile())
             {
-                ErrorMessage = "Unconfigured";
+                ErrorMessage = Messages.Unconfigured;
             }
             else
             {
-                ErrorMessage = "Failed unconfiguring";
-            };
+                ErrorMessage = Messages.FailedUnconfiguring;
+            }
         }
 
         private bool AddToAllContextMenus(string sdeletePath, int numberOfPassess)
@@ -96,7 +95,10 @@ namespace SDelete_Gui.ViewModel
             foreach (RegistryKey registryKey in GetRegistryKeys(sdeletePath, numberOfPassess))
             {
                 bool result = AddToContextMenu(registryKey);
-                if (!result) return false;
+                if (!result)
+                {
+                    return false;
+                }
             }
             return true;
         }
@@ -160,7 +162,6 @@ namespace SDelete_Gui.ViewModel
             {
                 return false;
             }
-
         }
 
         private IEnumerable<RegistryKey> GetRegistryKeys(string sdeletePath, int numberOfPassess)
@@ -168,16 +169,15 @@ namespace SDelete_Gui.ViewModel
             return new List<RegistryKey>()
             {
                 new RegistryKey { RegistryPath = "*\\shell\\",
-                                  ShellName = "Secure Delete",
-                                  Command = String.Format("{0} -p {1} -s -q \"%1\"", sdeletePath, numberOfPassess) },
+                                  ShellName = Messages.SecureDelete,
+                                  Command = $"{sdeletePath} -p {numberOfPassess} -s -q \"%1\"" },
                 new RegistryKey { RegistryPath = "Directory\\shell\\",
-                                  ShellName = "Secure Delete",
-                                  Command = String.Format("{0} -p {1} -s -q \"%1\"", sdeletePath, numberOfPassess) },
-                 new RegistryKey { RegistryPath = "Drive\\shell\\",
-                                  ShellName = "Secure Delete",
-                                  Command = String.Format(@"{0} -p {1} -q -z -c %1", sdeletePath, numberOfPassess) }
+                                  ShellName = Messages.SecureDelete,
+                                  Command = $"{sdeletePath} -p {numberOfPassess} -s -q \"%1\"" },
+                new RegistryKey { RegistryPath = "Drive\\shell\\",
+                                  ShellName = Messages.SecureDelete,
+                                  Command = $@"{sdeletePath} -p {numberOfPassess} -q -z -c %1" }
             };
         }
-
     }
 }
