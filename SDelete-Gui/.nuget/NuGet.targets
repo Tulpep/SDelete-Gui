@@ -4,7 +4,7 @@
         <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
 
         <!-- Enable the restore command to run before builds -->
-        <RestorePackages Condition="  '$(RestorePackages)' == '' ">true</RestorePackages>
+        <RestorePackages Condition="  '$(RestorePackages)' == '' ">false</RestorePackages>
 
         <!-- Property that enables building a package from a project -->
         <BuildPackage Condition=" '$(BuildPackage)' == '' ">false</BuildPackage>
@@ -88,14 +88,6 @@
         This effectively acts as a lock that makes sure that the download operation will only happen once and all
         parallel builds will have to wait for it to complete.
         -->
-	    <Message Text="OS: $(OS)"/>
-		<Message Text="PaddedSolutionDir: $(PaddedSolutionDir)"/>
-		<Message Text="SolutionDir: $(SolutionDir)"/>
-		<Message Text="MSBuildProjectDirectory: $(MSBuildProjectDirectory)"/>
-		<Message Text="PackageOutputDir: $(PackageOutputDir)"/>
-		<Message Text="PackagesConfig: $(PackagesConfig)"/>
-		<Message Text="MsBuildMajorVersion: $([System.Version]::Parse($(MSBuildVersion)).Major)"/>
-		
 		<MsBuild Targets="_DownloadNuGet" Projects="$(MSBuildThisFileFullPath)" Properties="Configuration=NOT_IMPORTANT;DownloadNuGetExe=$(DownloadNuGetExe)" />
     </Target>
 
