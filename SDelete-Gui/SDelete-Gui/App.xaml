@@ -14,7 +14,7 @@
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
       </ResourceDictionary.MergedDictionaries>
       <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
-      <resx:Messages x:Key="ApplicationStringResources" />
+      <resx:Messages x:Key="Messages" />
     </ResourceDictionary>
   </Application.Resources>
 </Application>
