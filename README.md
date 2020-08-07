@@ -7,10 +7,7 @@ SDelete Gui [![Build Status](https://ci.appveyor.com/api/projects/status/github/
 ### [Download now][1]
 
 ## Introduction
-
-**SDelete Gui** is simple application that allows you to add, configure, and remove a "Secure Delete" option in the Windows context (right-click) menu of a selected file or folder. 
-
-Secure Delete will **securely** and **permanently** delete all selected files and folders.  
+**SDelete Gui** is simple application that allows you to add, configure, and remove a "Secure Delete" option in the Windows context (right-click) menu of a selected file or folder. Secure Delete will **securely** and **permanently** delete all selected files and folders.  
 
 **Note: There is NO confirmation dialog prior to deletion.  Once Secure Delete is clicked, all selected files and folders will be deleted and completely unrecoverable!**
 
