@@ -2,19 +2,45 @@
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-                      Title="SDelete Gui" Height="262.55" Width="295.039"
+                      Title="SDelete Gui" Height="229.792" Width="310"
                       ResizeMode="NoResize"
-                      EnableDWMDropShadow="True"
                       WindowTransitionsEnabled="True"
-                      DataContext="{Binding Main, Source={StaticResource Locator}}">
-    <Grid Height="216" VerticalAlignment="Top">
-        <Button Height="20" Width="20" Style="{DynamicResource MetroCircleButtonStyle}" Margin="259,10,10,186" Command="{Binding InfoCommand}">
-            <Path Stretch="Fill" Fill="#FF000000" Data="F1 M 38,19C 48.4934,19 57,27.5066 57,38C 57,48.4934 48.4934,57 38,57C 27.5066,57 19,48.4934 19,38C 19,27.5066 27.5066,19 38,19 Z M 33.25,33.25L 33.25,36.4167L 36.4166,36.4167L 36.4166,47.5L 33.25,47.5L 33.25,50.6667L 44.3333,50.6667L 44.3333,47.5L 41.1666,47.5L 41.1666,36.4167L 41.1666,33.25L 33.25,33.25 Z M 38.7917,25.3333C 37.48,25.3333 36.4167,26.3967 36.4167,27.7083C 36.4167,29.02 37.48,30.0833 38.7917,30.0833C 40.1033,30.0833 41.1667,29.02 41.1667,27.7083C 41.1667,26.3967 40.1033,25.3333 38.7917,25.3333 Z " RenderTransformOrigin="0.478,-0.798"/>
+                      DataContext="{Binding Main, Source={StaticResource Locator}}" WindowStartupLocation="CenterScreen">
+    <Grid Height="200" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="42"/>
+            <RowDefinition Height="51"/>
+            <RowDefinition Height="47"/>
+            <RowDefinition Height="59*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="111"/>
+            <ColumnDefinition Width="44"/>
+        </Grid.ColumnDefinitions>
+        <Button Style="{DynamicResource MahApps.Styles.Button.Circle}" Command="{Binding InfoCommand}" 
+                Grid.Row="0" Grid.Column="2" ToolTip="{Binding InfoToolTip, Source={StaticResource ResourceKey=Messages}}" 
+                RenderTransformOrigin="5.2,0.55" Margin="10,10,10,8" VerticalAlignment="Center" HorizontalAlignment="Center" Height="24" Width="24">
+            <Path Stretch="Fill" Fill="#FF3F3F46" 
+                  Data="F1 M 38,19C 48.4934,19 57,27.5066 57,38C 57,48.4934 48.4934,57 38,57C 27.5066,57 19,48.4934 19,38C 19,27.5066 27.5066,19 38,19 Z M 33.25,33.25L 33.25,36.4167L 36.4166,36.4167L 36.4166,47.5L 33.25,47.5L 33.25,50.6667L 44.3333,50.6667L 44.3333,47.5L 41.1666,47.5L 41.1666,36.4167L 41.1666,33.25L 33.25,33.25 Z M 38.7917,25.3333C 37.48,25.3333 36.4167,26.3967 36.4167,27.7083C 36.4167,29.02 37.48,30.0833 38.7917,30.0833C 40.1033,30.0833 41.1667,29.02 41.1667,27.7083C 41.1667,26.3967 40.1033,25.3333 38.7917,25.3333 Z " 
+                  RenderTransformOrigin="0.478,-0.798" Width="22" Height="22.25" VerticalAlignment="Center"
+                  HorizontalAlignment="Center"/>
         </Button>
-        <Label x:Name="PasessLabel" Content="How many passes will it use?" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Width="179" Height="26"/>
-        <controls:NumericUpDown Minimum="1" Maximum="100" Value="{Binding NumberOfPasses}" Margin="194,44,10,0" Height="36" VerticalAlignment="Top"/>
-        <Button Command="{Binding ConfigureCommand}"  Content="Enable" Margin="10,99,149,0" Height="73" VerticalAlignment="Top" />
-        <Button Command="{Binding UnConfigureCommand}" Content="Disable" Margin="150,99,12,0" Height="73" VerticalAlignment="Top"/>
-        <TextBlock Text="{Binding ErrorMessage}" VerticalAlignment="Top" Height="36" Margin="10,180,16,0"  TextWrapping="Wrap"/>
+        <Label x:Name="PasessLabel" Content="{Binding HowManyPasses, Source={StaticResource ResourceKey=Messages}}" 
+               HorizontalAlignment="Left" Width="203" 
+               Grid.Row="1" Grid.ColumnSpan="2" Margin="10,10,0,0" Height="28" VerticalAlignment="Top"/>
+        <controls:NumericUpDown Minimum="1" Maximum="100" Value="{Binding NumberOfPasses}" Margin="67,10,10,0" 
+                                Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Height="28" VerticalAlignment="Top" />
+        <Button Command="{Binding ConfigureCommand}" Content="Enable" 
+                Margin="10,10,5,0" Grid.Row="2" Height="28" VerticalAlignment="Top" />
+        <!--<Button Command="{Binding ConfigureCommand}" Content="{Binding Enable, Source={StaticResource ResourceKey=Messages}}" 
+                Margin="10,10,10,0" Grid.Row="2" Height="28" VerticalAlignment="Top" />-->
+        <Button Command="{Binding UnConfigureCommand}" Content="Disable" 
+                Margin="10,10,10,0" Height="28" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="1" />
+        <!--<Button Command="{Binding UnConfigureCommand}" Content="{Binding Disable, Source={StaticResource ResourceKey=Messages}}" 
+                Margin="10,10,10,0" Height="28" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="1" />-->
+        <TextBlock Text="{Binding ErrorMessage}" VerticalAlignment="Top" Height="40" Margin="10,10,8,0" 
+                   TextWrapping="Wrap" Grid.ColumnSpan="3" Grid.Row="3"/>
     </Grid>
 </controls:MetroWindow>
