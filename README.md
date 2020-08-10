@@ -7,13 +7,11 @@ SDelete Gui [![Build Status](https://ci.appveyor.com/api/projects/status/github/
 ### [Download now][1]
 
 ## Introduction
-**SDelete Gui** is simple application that allows you to add, configure, and remove a "Secure Delete" option in the Windows context (right-click) menu of a selected file or folder. Secure Delete will **securely** and **permanently** delete all selected files and folders.  
+**SDelete Gui** is simple application that allows you to add, configure, and remove a "Secure Delete" option in the Windows context menu (right-click) of a selected file or folder. Secure Delete will **securely** and **permanently** delete all selected files and folders.  
 
 **Note: There is NO confirmation dialog prior to deletion.  Once Secure Delete is clicked, all selected files and folders will be deleted and completely unrecoverable!**
 
-Because the application makes changes to the registry, it requires the ability to have elevated privileges.
-
-It uses the [SDelete][2] utility of [Microsoft Sysinternals][3] written by [Mark Russinovich][4] to perform the file and folder deletion using a United States Department of Defense compliant algorithm. Click on [this link][5] to see how the SDelete utility works. 
+This tool adds the right menu option but does not contain the logic for deletion. It uses [SDelete](http://technet.microsoft.com/en-us/sysinternals/bb897443.aspx) of [Microsoft Sysinternals](http://technet.microsoft.com/en-us/sysinternals/bb545021.aspx) written by [Mark Russinovich](http://blogs.technet.com/b/markrussinovich/) to perform the file and folder deletion using a United States Department of Defense compliant algorithm. Click on [this link][5] to see how the SDelete utility works. 
 
 The application will download SDelete from Microsoft's web site in order to work properly. If the download fails, it will check if you already have SDelete in your System32 or SysWow64 folder.  In the event that SDelete could not be downloaded and it cannot be found on the hard drive, the application will display an error message and will not function correctly. 
 
@@ -22,7 +20,8 @@ The application will download SDelete from Microsoft's web site in order to work
 2) Run the downloaded file.
 3) Click "Yes" on the UAC Prompt that shows up. 
 ![UAC Dialog][UAC]
-4) The utility opens up.
+4) The configuration window opens up
+
 ![Main Utility interface image][Utility]
 5) Press the '+' or '-' buttons to increase or decrease the number of passes the deletion will use. The ENABLE button must be clicked to save the value.
 ![Change the number of passes image][ChangedPasses]
