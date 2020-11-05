@@ -69,7 +69,14 @@ namespace SDelete_Gui.ViewModel
             {
                 try
                 {
-                    client.DownloadFile("https://live.sysinternals.com/sdelete.exe", downloadPath);
+                    if (Environment.Is64BitOperatingSystem)
+                    {
+                        client.DownloadFile("https://live.sysinternals.com/sdelete64.exe", downloadPath);
+                    }
+                    else
+                    {
+                        client.DownloadFile("https://live.sysinternals.com/sdelete.exe", downloadPath);
+                    }
                     return true;
                 }
                 catch
