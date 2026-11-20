@@ -1,47 +1,94 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Microsoft.Win32;
 using SDelete_Gui.Properties;
+using SDelete_Gui.Services;
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Windows.Input;
 
 namespace SDelete_Gui.ViewModel
 {
+    /// <summary>
+    /// Controls configuration state and commands for the SDelete-Gui main window.
+    /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        private readonly SDeleteOptions _options;
+        private readonly string _systempath = Environment.GetFolderPath(Environment.SpecialFolder.SystemX86);
+        private readonly string _sdeletePath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.SystemX86),
+            "sdelete.exe");
+
         private string _errorMessage;
         public string ErrorMessage
         {
             get { return _errorMessage; }
-            set { _errorMessage = value; RaisePropertyChanged("ErrorMessage"); }
+            set { _errorMessage = value; RaisePropertyChanged(nameof(ErrorMessage)); }
         }
 
-        private int _numberOfPasses;
         public int NumberOfPasses
         {
-            get { return _numberOfPasses; }
-            set { _numberOfPasses = value; RaisePropertyChanged("NumberOfPasses"); }
+            get { return _options.NumberOfPasses; }
+            set
+            {
+                _options.NumberOfPasses = value;
+                _options.Normalize();
+                RaisePropertyChanged(nameof(NumberOfPasses));
+            }
+        }
+
+        public bool ConfirmBeforeDelete
+        {
+            get { return _options.ConfirmBeforeDelete; }
+            set { _options.ConfirmBeforeDelete = value; RaisePropertyChanged(nameof(ConfirmBeforeDelete)); }
+        }
+
+        public bool SequentialExecution
+        {
+            get { return _options.SequentialExecution; }
+            set { _options.SequentialExecution = value; RaisePropertyChanged(nameof(SequentialExecution)); }
+        }
+
+        public bool UsePassSubmenu
+        {
+            get { return _options.UsePassSubmenu; }
+            set { _options.UsePassSubmenu = value; RaisePropertyChanged(nameof(UsePassSubmenu)); }
+        }
+
+        public bool ShowContextMenuIcon
+        {
+            get { return _options.ShowContextMenuIcon; }
+            set { _options.ShowContextMenuIcon = value; RaisePropertyChanged(nameof(ShowContextMenuIcon)); }
+        }
+
+        public bool EnableAuditLog
+        {
+            get { return _options.EnableAuditLog; }
+            set { _options.EnableAuditLog = value; RaisePropertyChanged(nameof(EnableAuditLog)); }
+        }
+
+        public string LogFilePath
+        {
+            get { return _options.LogFilePath; }
+            set { _options.LogFilePath = value; RaisePropertyChanged(nameof(LogFilePath)); }
         }
 
         public ICommand ConfigureCommand { get; set; }
         public ICommand UnConfigureCommand { get; set; }
         public ICommand InfoCommand { get; set; }
 
-        private readonly string _systempath = Environment.GetFolderPath(Environment.SpecialFolder.SystemX86);
-        private readonly string _sdeletePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.SystemX86), "sdelete.exe");
-
         public MainViewModel()
         {
-            NumberOfPasses = 10;
+            _options = SDeleteOptions.Load();
             ErrorMessage = Messages.ReadyToStart;
-            ConfigureCommand = new RelayCommand(() => ExecuteConfigure());
-            UnConfigureCommand = new RelayCommand(() => ExecuteUnConfigure());
+            ConfigureCommand = new RelayCommand(ExecuteConfigure);
+            UnConfigureCommand = new RelayCommand(ExecuteUnConfigure);
             InfoCommand = new RelayCommand(() =>
             {
-                _ = System.Diagnostics.Process.Start("https://github.com/Tulpep/SDelete-Gui#sdelete-gui-");
+                _ = Process.Start("https://github.com/Tulpep/SDelete-Gui#sdelete-gui-");
             });
         }
 
@@ -53,41 +100,33 @@ namespace SDelete_Gui.ViewModel
                 return;
             }
 
-            if (AddToAllContextMenus(_sdeletePath, NumberOfPasses))
+            try
+            {
+                _options.Save();
+            }
+            catch
+            {
+                ErrorMessage = Messages.CheckPermissions;
+                return;
+            }
+
+            string runnerPath = ResolveRunnerExecutablePath();
+            if (ContextMenuManager.ApplyAll(runnerPath, _options))
             {
                 ErrorMessage = string.Format(Messages.ConfiguredXPasses, NumberOfPasses);
             }
             else
             {
                 ErrorMessage = Messages.CheckPermissions;
-            };
-        }
-
-        private bool DownloadSdelete(string downloadPath)
-        {
-            using (WebClient client = new WebClient())
-            {
-                try
-                {
-                    if (Environment.Is64BitOperatingSystem)
-                    {
-                        client.DownloadFile("https://live.sysinternals.com/sdelete64.exe", downloadPath);
-                    }
-                    else
-                    {
-                        client.DownloadFile("https://live.sysinternals.com/sdelete.exe", downloadPath);
-                    }
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
             }
         }
+
         private void ExecuteUnConfigure()
         {
-            if (RemoveFromAllContextMenu() && RemoveSdeleteFile())
+            bool menusRemoved = ContextMenuManager.RemoveAll();
+            bool fileRemoved = RemoveSdeleteFile();
+
+            if (menusRemoved && fileRemoved)
             {
                 ErrorMessage = Messages.Unconfigured;
             }
@@ -97,62 +136,42 @@ namespace SDelete_Gui.ViewModel
             }
         }
 
-        private bool AddToAllContextMenus(string sdeletePath, int numberOfPassess)
+        private static string ResolveRunnerExecutablePath()
         {
-            foreach (RegistryKey registryKey in GetRegistryKeys(sdeletePath, numberOfPassess))
-            {
-                bool result = AddToContextMenu(registryKey);
-                if (!result)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        private bool AddToContextMenu(RegistryKey registryKey)
-        {
-            Microsoft.Win32.RegistryKey regmenu = null;
-            Microsoft.Win32.RegistryKey regcmd = null;
-
-            bool result;
             try
             {
-                string keyName = registryKey.RegistryPath + registryKey.ShellName;
-                regmenu = Registry.ClassesRoot.CreateSubKey(keyName);
-                regcmd = Registry.ClassesRoot.CreateSubKey(keyName + "\\command");
-                regcmd.SetValue("", registryKey.Command);
-                result = true;
+                string processPath = Process.GetCurrentProcess().MainModule?.FileName;
+                if (!string.IsNullOrWhiteSpace(processPath))
+                {
+                    return processPath;
+                }
             }
             catch
             {
-                result = false;
-            }
-            finally
-            {
-                if (regmenu != null)
-                    regmenu.Dispose();
-                if (regcmd != null)
-                    regcmd.Dispose();
+                // Fall back to the assembly location if process inspection fails.
             }
 
-            return result;
+            return Assembly.GetExecutingAssembly().Location;
         }
 
-        private bool RemoveFromAllContextMenu()
+        private static bool DownloadSdelete(string downloadPath)
         {
-            foreach (RegistryKey registryKey in GetRegistryKeys(null, 0))
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
+            using (var client = new WebClient())
             {
                 try
                 {
-                    Registry.ClassesRoot.DeleteSubKeyTree(registryKey.RegistryPath + registryKey.ShellName);
+                    string url = Environment.Is64BitOperatingSystem
+                        ? "https://live.sysinternals.com/sdelete64.exe"
+                        : "https://live.sysinternals.com/sdelete.exe";
+                    client.DownloadFile(url, downloadPath);
+                    return true;
                 }
                 catch
                 {
                     return false;
                 }
             }
-            return true;
         }
 
         private bool RemoveSdeleteFile()
@@ -163,28 +182,13 @@ namespace SDelete_Gui.ViewModel
                 {
                     File.Delete(_sdeletePath);
                 }
+
                 return true;
             }
             catch
             {
                 return false;
             }
-        }
-
-        private IEnumerable<RegistryKey> GetRegistryKeys(string sdeletePath, int numberOfPassess)
-        {
-            return new List<RegistryKey>()
-            {
-                new RegistryKey { RegistryPath = "*\\shell\\",
-                                  ShellName = Messages.SecureDelete,
-                                  Command = $"{sdeletePath} -p {numberOfPassess} -s -q \"%1\"" },
-                new RegistryKey { RegistryPath = "Directory\\shell\\",
-                                  ShellName = Messages.SecureDelete,
-                                  Command = $"{sdeletePath} -p {numberOfPassess} -s -q \"%1\"" },
-                new RegistryKey { RegistryPath = "Drive\\shell\\",
-                                  ShellName = Messages.SecureDelete,
-                                  Command = $@"{sdeletePath} -p {numberOfPassess} -q -z -c %1" }
-            };
         }
     }
 }

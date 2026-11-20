@@ -149,4 +149,61 @@
   <data name="Unconfigured" xml:space="preserve">
     <value>Deshabilitado.</value>
   </data>
+  <data name="ConfirmBeforeDeleteLabel" xml:space="preserve">
+    <value>Pedir confirmaci?n antes de borrar</value>
+  </data>
+  <data name="SequentialExecutionLabel" xml:space="preserve">
+    <value>Borrar m?ltiples archivos de forma secuencial</value>
+  </data>
+  <data name="UsePassSubmenuLabel" xml:space="preserve">
+    <value>Agregar submen? de pasadas (1, 3, 5, 7, 35)</value>
+  </data>
+  <data name="ShowContextMenuIconLabel" xml:space="preserve">
+    <value>Mostrar icono de advertencia en el men?</value>
+  </data>
+  <data name="EnableAuditLogLabel" xml:space="preserve">
+    <value>Registrar elementos borrados con fecha y hora</value>
+  </data>
+  <data name="LogFilePathLabel" xml:space="preserve">
+    <value>Ruta del archivo de registro:</value>
+  </data>
+  <data name="SubmenuDefaultPasses" xml:space="preserve">
+    <value>Predeterminado ({0} pasadas)</value>
+  </data>
+  <data name="SubmenuOnePass" xml:space="preserve">
+    <value>1 pasada</value>
+  </data>
+  <data name="SubmenuNPasses" xml:space="preserve">
+    <value>{0} pasadas</value>
+  </data>
+  <data name="EraseFreeSpaceMenu" xml:space="preserve">
+    <value>Borrar espacio libre (SDelete)</value>
+  </data>
+  <data name="CleanFreeSpaceLabel" xml:space="preserve">
+    <value>Limpiar espacio libre (-c, {0} pasadas)</value>
+  </data>
+  <data name="ZeroFreeSpaceLabel" xml:space="preserve">
+    <value>Llenar espacio libre con ceros (-z, {0} pasadas)</value>
+  </data>
+  <data name="CleanFreeSpaceShort" xml:space="preserve">
+    <value>limpieza de espacio libre</value>
+  </data>
+  <data name="ZeroFreeSpaceShort" xml:space="preserve">
+    <value>llenado con ceros del espacio libre</value>
+  </data>
+  <data name="ConfirmDialogTitle" xml:space="preserve">
+    <value>Confirmar Borrado Seguro</value>
+  </data>
+  <data name="ConfirmDeletePrompt" xml:space="preserve">
+    <value>?Borrar permanentemente {0} elemento(s) con {1} pasada(s)?</value>
+  </data>
+  <data name="ConfirmFreeSpacePrompt" xml:space="preserve">
+    <value>?Ejecutar {0} en la unidad {1} con {2} pasada(s)?</value>
+  </data>
+  <data name="ConfirmMoreItems" xml:space="preserve">
+    <value>...y {0} elemento(s) m?s.</value>
+  </data>
+  <data name="ConfirmIrreversibleWarning" xml:space="preserve">
+    <value>Esta acci?n no se puede deshacer.</value>
+  </data>
 </root>
