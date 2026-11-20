@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -149,5 +149,62 @@
   </data>
   <data name="Unconfigured" xml:space="preserve">
     <value>Unconfigured</value>
+  </data>
+  <data name="ConfirmBeforeDeleteLabel" xml:space="preserve">
+    <value>Ask for confirmation before deletion</value>
+  </data>
+  <data name="SequentialExecutionLabel" xml:space="preserve">
+    <value>Erase multiple selected files sequentially</value>
+  </data>
+  <data name="UsePassSubmenuLabel" xml:space="preserve">
+    <value>Add pass-count submenu (1, 3, 5, 7, 35)</value>
+  </data>
+  <data name="ShowContextMenuIconLabel" xml:space="preserve">
+    <value>Show warning icon in context menu</value>
+  </data>
+  <data name="EnableAuditLogLabel" xml:space="preserve">
+    <value>Log deleted items with timestamp</value>
+  </data>
+  <data name="LogFilePathLabel" xml:space="preserve">
+    <value>Log file path:</value>
+  </data>
+  <data name="SubmenuDefaultPasses" xml:space="preserve">
+    <value>Default ({0} passes)</value>
+  </data>
+  <data name="SubmenuOnePass" xml:space="preserve">
+    <value>1 pass</value>
+  </data>
+  <data name="SubmenuNPasses" xml:space="preserve">
+    <value>{0} passes</value>
+  </data>
+  <data name="EraseFreeSpaceMenu" xml:space="preserve">
+    <value>Erase Free Space (SDelete)</value>
+  </data>
+  <data name="CleanFreeSpaceLabel" xml:space="preserve">
+    <value>Clean free space (-c, {0} passes)</value>
+  </data>
+  <data name="ZeroFreeSpaceLabel" xml:space="preserve">
+    <value>Zero free space (-z, {0} passes)</value>
+  </data>
+  <data name="CleanFreeSpaceShort" xml:space="preserve">
+    <value>clean free space</value>
+  </data>
+  <data name="ZeroFreeSpaceShort" xml:space="preserve">
+    <value>zero free space</value>
+  </data>
+  <data name="ConfirmDialogTitle" xml:space="preserve">
+    <value>Confirm Secure Delete</value>
+  </data>
+  <data name="ConfirmDeletePrompt" xml:space="preserve">
+    <value>Permanently erase {0} item(s) with {1} pass(es)?</value>
+  </data>
+  <data name="ConfirmFreeSpacePrompt" xml:space="preserve">
+    <value>Run {0} on drive {1} with {2} pass(es)?</value>
+  </data>
+  <data name="ConfirmMoreItems" xml:space="preserve">
+    <value>...and {0} more item(s).</value>
+  </data>
+  <data name="ConfirmIrreversibleWarning" xml:space="preserve">
+    <value>This action cannot be undone.</value>
   </data>
 </root>

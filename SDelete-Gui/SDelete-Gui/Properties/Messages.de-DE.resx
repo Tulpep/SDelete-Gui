@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -149,5 +149,62 @@
   </data>
   <data name="Unconfigured" xml:space="preserve">
     <value>Nicht konfiguriert</value>
+  </data>
+  <data name="ConfirmBeforeDeleteLabel" xml:space="preserve">
+    <value>Vor dem L?schen best?tigen</value>
+  </data>
+  <data name="SequentialExecutionLabel" xml:space="preserve">
+    <value>Mehrere Dateien nacheinander l?schen</value>
+  </data>
+  <data name="UsePassSubmenuLabel" xml:space="preserve">
+    <value>Untermen? f?r Durchl?ufe (1, 3, 5, 7, 35)</value>
+  </data>
+  <data name="ShowContextMenuIconLabel" xml:space="preserve">
+    <value>Warnsymbol im Kontextmen? anzeigen</value>
+  </data>
+  <data name="EnableAuditLogLabel" xml:space="preserve">
+    <value>Gel?schte Elemente mit Zeitstempel protokollieren</value>
+  </data>
+  <data name="LogFilePathLabel" xml:space="preserve">
+    <value>Pfad der Protokolldatei:</value>
+  </data>
+  <data name="SubmenuDefaultPasses" xml:space="preserve">
+    <value>Standard ({0} Durchl?ufe)</value>
+  </data>
+  <data name="SubmenuOnePass" xml:space="preserve">
+    <value>1 Durchlauf</value>
+  </data>
+  <data name="SubmenuNPasses" xml:space="preserve">
+    <value>{0} Durchl?ufe</value>
+  </data>
+  <data name="EraseFreeSpaceMenu" xml:space="preserve">
+    <value>Freien Speicher l?schen (SDelete)</value>
+  </data>
+  <data name="CleanFreeSpaceLabel" xml:space="preserve">
+    <value>Freien Speicher bereinigen (-c, {0} Durchl?ufe)</value>
+  </data>
+  <data name="ZeroFreeSpaceLabel" xml:space="preserve">
+    <value>Freien Speicher mit Nullen ?berschreiben (-z, {0} Durchl?ufe)</value>
+  </data>
+  <data name="CleanFreeSpaceShort" xml:space="preserve">
+    <value>Bereinigung des freien Speichers</value>
+  </data>
+  <data name="ZeroFreeSpaceShort" xml:space="preserve">
+    <value>Nullen des freien Speichers</value>
+  </data>
+  <data name="ConfirmDialogTitle" xml:space="preserve">
+    <value>Sicheres L?schen best?tigen</value>
+  </data>
+  <data name="ConfirmDeletePrompt" xml:space="preserve">
+    <value>{0} Element(e) dauerhaft mit {1} Durchlauf/Durchl?ufen l?schen?</value>
+  </data>
+  <data name="ConfirmFreeSpacePrompt" xml:space="preserve">
+    <value>{0} auf Laufwerk {1} mit {2} Durchlauf/Durchl?ufen ausf?hren?</value>
+  </data>
+  <data name="ConfirmMoreItems" xml:space="preserve">
+    <value>...und {0} weitere Elemente.</value>
+  </data>
+  <data name="ConfirmIrreversibleWarning" xml:space="preserve">
+    <value>Diese Aktion kann nicht r?ckg?ngig gemacht werden.</value>
   </data>
 </root>
